@@ -19,10 +19,10 @@ function playGame() {
             (userChoice === "paper" && computerChoice === "rock") ||
             (userChoice === "scissors" && computerChoice === "paper")
         ) {
-            alert("You win this round! " + userChoice + " beats " + computerChoice);
+            alert("You win this round! Computer chose " + computerChoice + ". " + userChoice + " beats " + computerChoice);
             return 1;
         } else {
-            alert("Computer wins this round! " + computerChoice + " beats " + userChoice);
+            alert("Computer wins this round! Computer chose " + computerChoice + ". " + computerChoice + " beats " + userChoice);
             return -1;
         }
     }
