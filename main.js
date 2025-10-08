@@ -1,50 +1,47 @@
-function getComputerChoice () {
-    let comChoice = Math.random();
-    if (comChoice < 0.34) {
-        return 'rock';
-    } else if (comChoice <= 0.67) {
-        return 'paper';
+// Main rock-paper-scissors function
+function playGame() {
+    let userScore = 0;
+    let computerScore = 0;
+// Function declare to get computer's choice
+    function getComputerChoice() {
+        const rand = Math.random();
+        if (rand < 1 / 3) return "rock";
+        else if (rand < 2 / 3) return "paper";
+        else return "scissors";
+    }
+// Function to play a single round
+    function playRound(userChoice, computerChoice) {
+        if (userChoice === computerChoice) {
+            alert("It's a tie! Both chose " + userChoice);
+            return 0;
+        } else if (
+            (userChoice === "rock" && computerChoice === "scissors") ||
+            (userChoice === "paper" && computerChoice === "rock") ||
+            (userChoice === "scissors" && computerChoice === "paper")
+        ) {
+            alert("You win this round! " + userChoice + " beats " + computerChoice);
+            return 1;
+        } else {
+            alert("Computer wins this round! " + computerChoice + " beats " + userChoice);
+            return -1;
+        }
+    }
+// Loop to play 5 rounds
+    for (let round = 1; round <= 5; round++) {
+        let userChoice = prompt("Round " + round + ": Choose rock, paper, or scissors:").toLowerCase();
+        let computerChoice = getComputerChoice();
+        let result = playRound(userChoice, computerChoice);
+        if (result === 1) userScore++;
+        else if (result === -1) computerScore++;
+    }
+// Determine and announce the overall winner
+    if (userScore > computerScore) {
+        alert("You win the game! Final score: you got " + userScore + " points, computer got " + computerScore + " points.");
+    } else if (computerScore > userScore) {
+        alert("Computer wins the game! Final score: you got " + userScore + " points, computer got " + computerScore + " points.");
     } else {
-        return 'scissors';
+        alert("It's a tie! Final score: you got " + userScore + " points, computer got " + computerScore + " points.");
     }
 }
-
-function getUserChoice () {
-    let userChoice = prompt('Do you choose rock, paper or scissors?');
-    return userChoice.toLowerCase()
-}
-
-let computerScore = 0;
-let userScore = 0;
-
-function playRound (userChoice, comChoice) {
-    if (userChoice === comChoice) {
-        return alert('It\'s a tie!');
-    } else if (userChoice === 'rock') {
-        if (comChoice === 'scissors') {
-            userScore++;
-            return alert('You win! Rock beats scissors.');
-        } else {
-            computerScore++;
-            return alert('You lose! Paper beats rock.');
-        }
-    } else if (userChoice === 'paper') {
-        if (comChoice === 'rock') {
-            userScore++;
-            return alert('You win! Paper beats rock.');
-        } else {
-            computerScore++;
-            return alert('You lose! Scissors beats paper.');
-        }
-    } else if (userChoice === 'scissors') {
-        if (comChoice === 'paper') {
-            userScore++;
-            return alert('You win! Scissors beats paper.');
-        } else {
-            computerScore++;
-            return alert('You lose! Rock beats scissors.');
-        }
-    }
-}
-
-console.log('Welcome to Rock, Paper, Scissors!');
+// Start the game
+playGame();
